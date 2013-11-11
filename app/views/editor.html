@@ -1,0 +1,32 @@
+<div class="angular-meditor">
+	<div class="angular-meditor-toolbar" style="top: {{ position.top }}px; left: {{ position.left }}px" ng-class="{ 'angular-meditor-toolbar--show': showToolbar, 'angular-meditor-toolbar--bottom': position.bellow }">
+		<ul>
+			<li>
+				<button type="button" ng-click="SimpleAction('bold')" class="meditor-button-bold" ng-class="{ 'bold': 'meditor-button--active' }[styles.fontWeight]">
+					B
+				</button>
+			</li>
+			<li>
+				<button type="button" ng-click="SimpleAction('italic')" class="meditor-button-italic" ng-class="{ 'italic': 'meditor-button--active' }[styles.fontStyle]">
+					I
+				</button>
+			</li>
+			<li>
+				<button type="button" ng-click="SimpleAction('underline')" class="meditor-button-underline" ng-class="{ 'underline': 'meditor-button--active' }[styles.textDecoration]">
+					U
+				</button>
+			</li>
+			<li>
+				<label class="meditor-select">
+					<select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>
+				</label>
+			</li>
+			<li>
+				<label class="meditor-select">
+					<select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>
+				</label>
+			</li>
+		</ul>
+	</div>
+	<div class="angular-meditor-content" ng-transclude></div>
+</div>

@@ -1,0 +1,33 @@
+{
+	"name": "angular-meditor",
+	"version": "0.0.1",
+	"author": "Ionut Colceriu",
+	"ignore": [
+		"node_modules/",
+		"bower_components/",
+		"dist/scripts/plugins.js",
+		"dist/scripts/scripts.js",
+		"dist/styles/main.css",
+		".sass-cache",
+		".gitignore",
+		"npm-debug.log",
+		"*.html",
+		"CHANGELOG.md",
+		"Gruntfile.js",
+		"component.json",
+		"package.json"
+	],
+	"dependencies": {
+		"angular": "~1.2",
+		"jquery": "~2"
+	},
+	"devDependencies": {
+		"font-awesome": "~4",
+		"bourbon": "~3",
+		"foundation": "~4",
+		"normalize-css": "~2",
+		"angular-route": "~1.2",
+		"angular-mocks": "~1.2",
+		"angular-scenario": "~1.2"
+	}
+}
