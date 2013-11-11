@@ -12,4 +12,4 @@ Features
 
 * Dynamic font family loading from Google Fonts
 * Multiple editors on a single page
-* Edit exiting content with transclusion
+* Edit existing content with transclusion
