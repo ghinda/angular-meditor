@@ -13,122 +13,122 @@ $toolbarBackground: #222;
 $toolbarText: #efefef;
 
 .angular-meditor {
-	position: relative;
+  position: relative;
 
-	.angular-meditor-toolbar {
-		position: absolute;
-		z-index: -1;
-		display: block;
-		border: 1px solid darken($toolbarBackground, 2%);
-		border-radius: 3px;
-		opacity: 0;
-		padding: 0;
+  .angular-meditor-content {
 
-		font-size: 16px;
+  }
+}
 
-		@include transition-property (transform, opacity);
-		@include transition-duration(0.075s);
-		@include transition-timing-function(ease-out);
-		@include transform(translate3d(0, 10px, 0));
+.angular-meditor-toolbar {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  border: 1px solid darken($toolbarBackground, 2%);
+  border-radius: 3px;
+  opacity: 0;
+  padding: 0;
 
-		&:after {
-			position: absolute;
-			bottom: emCalc(-7);
-			left: 50%;
-			margin-left: emCalc(-3);
-			content: '';
-			display: block;
-			width: 0;
-			height: 0;
-			border-width: emCalc(7) emCalc(7) 0;
-			border-style: solid;
-			border-color: darken($toolbarBackground, 2%) transparent transparent;
-		}
+  font-size: 16px;
 
-		&.angular-meditor-toolbar--bottom:after {
-			bottom: auto;
-			top: emCalc(-7);
-			border-width: 0 emCalc(7) emCalc(7);
-			border-color: transparent transparent darken($toolbarBackground, 2%);
-		}
+  @include transition-property (transform, opacity);
+  @include transition-duration(0.075s);
+  @include transition-timing-function(ease-out);
+  @include transform(translate3d(0, 10px, 0));
 
-		ul {
-			overflow: hidden;
-			display: table-row;
-			list-style-type: none;
-			border-radius: 3px;
-		}
+  &:after {
+    position: absolute;
+    bottom: emCalc(-7);
+    left: 50%;
+    margin-left: emCalc(-3);
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: emCalc(7) emCalc(7) 0;
+    border-style: solid;
+    border-color: darken($toolbarBackground, 2%) transparent transparent;
+  }
 
-		li {
-			display: table-cell;
-			border: 0;
-			padding: 0;
-			margin: 0;
-		}
+  &.angular-meditor-toolbar--bottom:after {
+    bottom: auto;
+    top: emCalc(-7);
+    border-width: 0 emCalc(7) emCalc(7);
+    border-color: transparent transparent darken($toolbarBackground, 2%);
+  }
 
-		button,
-		select {
-			float: left;
-			height: emCalc(36);
-			margin: 0;
-			padding: emCalc(8) emCalc(12);
-			background-color: $toolbarBackground;
-			border-width: 1px 0 0 0;
-			border-color: lighten($toolbarBackground, 5%);
-			border-style: solid;
-			box-shadow: none;
+  ul {
+    overflow: hidden;
+    display: table-row;
+    list-style-type: none;
+    border-radius: 3px;
+  }
 
-			font-size: 1em;
-			color: $toolbarText;
+  li {
+    display: table-cell;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
 
-			//-webkit-appearance: none;
+  button,
+  select {
+    float: left;
+    height: emCalc(36);
+    margin: 0;
+    padding: emCalc(8) emCalc(12);
+    background-color: $toolbarBackground;
+    border-width: 1px 0 0 0;
+    border-color: lighten($toolbarBackground, 5%);
+    border-style: solid;
+    box-shadow: none;
 
-			@include transition (all .1s);
+    font-size: 1em;
+    color: $toolbarText;
 
-			&:hover {
-				cursor: pointer;
-				background-color: darken($toolbarBackground, 5%);
-			}
-		}
+    //-webkit-appearance: none;
 
-		select {
-			overflow: hidden;
-			width: emCalc(64);
-			text-overflow: ellipsis;
-		}
+    @include transition (all .1s);
 
-		.meditor-family-selector {
-			width: emCalc(120);
-		}
+    &:hover {
+      cursor: pointer;
+      background-color: darken($toolbarBackground, 5%);
+    }
+  }
 
-		button {
-			width: emCalc(40);
-		}
+  select {
+    overflow: hidden;
+    width: emCalc(64);
+    text-overflow: ellipsis;
+  }
 
-		.meditor-button--active {
-			background-color: darken($toolbarBackground, 5%);
-			border-width: 0 0 1px 0;
-		}
+  .meditor-family-selector {
+    width: emCalc(120);
+  }
 
-		.meditor-select {
-			position: relative;
-			overflow: hidden;
-			min-width: emCalc(52);
-			margin: 0;
-			padding: 0;
+  button {
+    width: emCalc(40);
+  }
 
-			font-size: 1em;
-		}
-	}
+  .meditor-button--active {
+    background-color: darken($toolbarBackground, 5%);
+    border-width: 0 0 1px 0;
+  }
 
-	.angular-meditor-toolbar--show {
-		opacity: 1;
-		z-index: 99999;
+  .meditor-select {
+    position: relative;
+    overflow: hidden;
+    min-width: emCalc(52);
+    margin: 0;
+    padding: 0;
 
-		@include transform(translate3d(0,0,0));
-	}
+    font-size: 1em;
+  }
+}
 
-	.angular-meditor-content {
+ .angular-meditor-toolbar--show {
+  opacity: 1;
+  z-index: 999999;
 
-	}
+  @include transform(translate3d(0,0,0));
 }

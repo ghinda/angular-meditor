@@ -9,97 +9,99 @@
 /* Mixins */
 .angular-meditor {
   position: relative; }
-  .angular-meditor .angular-meditor-toolbar {
+
+.angular-meditor-toolbar {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  border: 1px solid #1d1d1d;
+  border-radius: 3px;
+  opacity: 0;
+  padding: 0;
+  font-size: 16px;
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  transition-property: transform, opacity;
+  -webkit-transition-duration: 0.075s;
+  -moz-transition-duration: 0.075s;
+  transition-duration: 0.075s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0, 10px, 0);
+  -moz-transform: translate3d(0, 10px, 0);
+  -ms-transform: translate3d(0, 10px, 0);
+  -o-transform: translate3d(0, 10px, 0);
+  transform: translate3d(0, 10px, 0); }
+  .angular-meditor-toolbar:after {
     position: absolute;
-    z-index: -1;
+    bottom: -0.4375em;
+    left: 50%;
+    margin-left: -0.1875em;
+    content: '';
     display: block;
-    border: 1px solid #1d1d1d;
-    border-radius: 3px;
-    opacity: 0;
+    width: 0;
+    height: 0;
+    border-width: 0.4375em 0.4375em 0;
+    border-style: solid;
+    border-color: #1d1d1d transparent transparent; }
+  .angular-meditor-toolbar.angular-meditor-toolbar--bottom:after {
+    bottom: auto;
+    top: -0.4375em;
+    border-width: 0 0.4375em 0.4375em;
+    border-color: transparent transparent #1d1d1d; }
+  .angular-meditor-toolbar ul {
+    overflow: hidden;
+    display: table-row;
+    list-style-type: none;
+    border-radius: 3px; }
+  .angular-meditor-toolbar li {
+    display: table-cell;
+    border: 0;
     padding: 0;
-    font-size: 16px;
-    -webkit-transition-property: -webkit-transform, opacity;
-    -moz-transition-property: -moz-transform, opacity;
-    transition-property: transform, opacity;
-    -webkit-transition-duration: 0.075s;
-    -moz-transition-duration: 0.075s;
-    transition-duration: 0.075s;
-    -webkit-transition-timing-function: ease-out;
-    -moz-transition-timing-function: ease-out;
-    transition-timing-function: ease-out;
-    -webkit-transform: translate3d(0, 10px, 0);
-    -moz-transform: translate3d(0, 10px, 0);
-    -ms-transform: translate3d(0, 10px, 0);
-    -o-transform: translate3d(0, 10px, 0);
-    transform: translate3d(0, 10px, 0); }
-    .angular-meditor .angular-meditor-toolbar:after {
-      position: absolute;
-      bottom: -0.4375em;
-      left: 50%;
-      margin-left: -0.1875em;
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      border-width: 0.4375em 0.4375em 0;
-      border-style: solid;
-      border-color: #1d1d1d transparent transparent; }
-    .angular-meditor .angular-meditor-toolbar.angular-meditor-toolbar--bottom:after {
-      bottom: auto;
-      top: -0.4375em;
-      border-width: 0 0.4375em 0.4375em;
-      border-color: transparent transparent #1d1d1d; }
-    .angular-meditor .angular-meditor-toolbar ul {
-      overflow: hidden;
-      display: table-row;
-      list-style-type: none;
-      border-radius: 3px; }
-    .angular-meditor .angular-meditor-toolbar li {
-      display: table-cell;
-      border: 0;
-      padding: 0;
-      margin: 0; }
-    .angular-meditor .angular-meditor-toolbar button, .angular-meditor .angular-meditor-toolbar select {
-      float: left;
-      height: 2.25em;
-      margin: 0;
-      padding: 0.5em 0.75em;
-      background-color: #222222;
-      border-width: 1px 0 0 0;
-      border-color: #2f2f2f;
-      border-style: solid;
-      box-shadow: none;
-      font-size: 1em;
-      color: #efefef;
-      -webkit-transition: all 0.1s;
-      -moz-transition: all 0.1s;
-      transition: all 0.1s; }
-      .angular-meditor .angular-meditor-toolbar button:hover, .angular-meditor .angular-meditor-toolbar select:hover {
-        cursor: pointer;
-        background-color: #151515; }
-    .angular-meditor .angular-meditor-toolbar select {
-      overflow: hidden;
-      width: 4em;
-      text-overflow: ellipsis; }
-    .angular-meditor .angular-meditor-toolbar .meditor-family-selector {
-      width: 7.5em; }
-    .angular-meditor .angular-meditor-toolbar button {
-      width: 2.5em; }
-    .angular-meditor .angular-meditor-toolbar .meditor-button--active {
-      background-color: #151515;
-      border-width: 0 0 1px 0; }
-    .angular-meditor .angular-meditor-toolbar .meditor-select {
-      position: relative;
-      overflow: hidden;
-      min-width: 3.25em;
-      margin: 0;
-      padding: 0;
-      font-size: 1em; }
-  .angular-meditor .angular-meditor-toolbar--show {
-    opacity: 1;
-    z-index: 99999;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); }
+    margin: 0; }
+  .angular-meditor-toolbar button, .angular-meditor-toolbar select {
+    float: left;
+    height: 2.25em;
+    margin: 0;
+    padding: 0.5em 0.75em;
+    background-color: #222222;
+    border-width: 1px 0 0 0;
+    border-color: #2f2f2f;
+    border-style: solid;
+    box-shadow: none;
+    font-size: 1em;
+    color: #efefef;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s; }
+    .angular-meditor-toolbar button:hover, .angular-meditor-toolbar select:hover {
+      cursor: pointer;
+      background-color: #151515; }
+  .angular-meditor-toolbar select {
+    overflow: hidden;
+    width: 4em;
+    text-overflow: ellipsis; }
+  .angular-meditor-toolbar .meditor-family-selector {
+    width: 7.5em; }
+  .angular-meditor-toolbar button {
+    width: 2.5em; }
+  .angular-meditor-toolbar .meditor-button--active {
+    background-color: #151515;
+    border-width: 0 0 1px 0; }
+  .angular-meditor-toolbar .meditor-select {
+    position: relative;
+    overflow: hidden;
+    min-width: 3.25em;
+    margin: 0;
+    padding: 0;
+    font-size: 1em; }
+
+.angular-meditor-toolbar--show {
+  opacity: 1;
+  z-index: 999999;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }

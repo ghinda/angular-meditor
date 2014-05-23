@@ -98,24 +98,25 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         'u': ''
       };
 
-      var $toolbar = element.find('.angular-meditor-toolbar'),
-        $content = element.find('.angular-meditor-content'),
-        $selects = element.find('select');
+      var $toolbar = element.find('.angular-meditor-toolbar');
+      var $content = element.find('.angular-meditor-content');
+      var $selects = element.find('select');
+      var $body = angular.element('body');
 
       // edit all the things
       $content.attr('contenteditable', true);
 
       // position the toolbar above or bellow the selected text
       var setToolbarPosition = function () {
-        var toolbarHeight = $toolbar[0].offsetHeight,
-          toolbarWidth = $toolbar[0].offsetWidth,
-          spacing = 5,
-          selection = window.getSelection(),
-          range = selection.getRangeAt(0),
-          boundary = range.getBoundingClientRect(),
-          elementBoundary = element.get(0).getBoundingClientRect(),
-          topPosition = boundary.top - elementBoundary.top,
-          leftPosition = boundary.left - elementBoundary.left;
+        var toolbarHeight = $toolbar[0].offsetHeight;
+        var toolbarWidth = $toolbar[0].offsetWidth;
+        var spacing = 5;
+        var selection = window.getSelection();
+        var range = selection.getRangeAt(0);
+        var boundary = range.getBoundingClientRect();
+
+        var topPosition = boundary.top;
+        var leftPosition = boundary.left;
 
         // if there isn't enough space at the top, place it at the bottom
         // of the selection
@@ -131,6 +132,12 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
 
         // center toolbar above selected text
         scope.position.left = leftPosition - (toolbarWidth/2) + (boundary.width/2);
+
+        // add the scroll positions
+        // because getBoundingClientRect gives us the position
+        // relative to the viewport, not to the page
+        scope.position.top += $body[0].scrollTop;
+        scope.position.left += $body[0].scrollLeft;
 
         return this;
       };
@@ -292,6 +299,9 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(wf, s);
       })();
+
+      // move the toolbar to the body, we can use overflow: hidden on containers
+      $body.append(element.find('.angular-meditor-toolbar'));
 
     }
   };

@@ -83,10 +83,20 @@ angular.module('angular-meditor', []).directive('meditor', [
             'em': '',
             'u': ''
           };
-        var $toolbar = element.find('.angular-meditor-toolbar'), $content = element.find('.angular-meditor-content'), $selects = element.find('select');
+        var $toolbar = element.find('.angular-meditor-toolbar');
+        var $content = element.find('.angular-meditor-content');
+        var $selects = element.find('select');
+        var $body = angular.element('body');
         $content.attr('contenteditable', true);
         var setToolbarPosition = function () {
-          var toolbarHeight = $toolbar[0].offsetHeight, toolbarWidth = $toolbar[0].offsetWidth, spacing = 5, selection = window.getSelection(), range = selection.getRangeAt(0), boundary = range.getBoundingClientRect(), elementBoundary = element.get(0).getBoundingClientRect(), topPosition = boundary.top - elementBoundary.top, leftPosition = boundary.left - elementBoundary.left;
+          var toolbarHeight = $toolbar[0].offsetHeight;
+          var toolbarWidth = $toolbar[0].offsetWidth;
+          var spacing = 5;
+          var selection = window.getSelection();
+          var range = selection.getRangeAt(0);
+          var boundary = range.getBoundingClientRect();
+          var topPosition = boundary.top;
+          var leftPosition = boundary.left;
           if (boundary.top < toolbarHeight + spacing) {
             scope.position.top = topPosition + boundary.height + spacing;
             scope.position.bellow = true;
@@ -95,6 +105,8 @@ angular.module('angular-meditor', []).directive('meditor', [
             scope.position.bellow = false;
           }
           scope.position.left = leftPosition - toolbarWidth / 2 + boundary.width / 2;
+          scope.position.top += $body[0].scrollTop;
+          scope.position.left += $body[0].scrollLeft;
           return this;
         };
         var checkSelection = function () {
@@ -199,6 +211,7 @@ angular.module('angular-meditor', []).directive('meditor', [
           var s = document.getElementsByTagName('script')[0];
           s.parentNode.insertBefore(wf, s);
         }());
+        $body.append(element.find('.angular-meditor-toolbar'));
       }
     };
   }
@@ -207,6 +220,6 @@ angular.module('angular-meditor').run([
   '$templateCache',
   function ($templateCache) {
     'use strict';
-    $templateCache.put('views/editor.html', '<div class="angular-meditor">\n' + '\t<div class="angular-meditor-toolbar" style="top: {{ position.top }}px; left: {{ position.left }}px" ng-class="{ \'angular-meditor-toolbar--show\': showToolbar, \'angular-meditor-toolbar--bottom\': position.bellow }">\n' + '\t\t<ul>\n' + '\t\t\t<li>\n' + '\t\t\t\t<button type="button" ng-click="SimpleAction(\'bold\')" class="meditor-button-bold" ng-class="{ \'bold\': \'meditor-button--active\' }[styles.fontWeight]">\n' + '\t\t\t\t\tB\n' + '\t\t\t\t</button>\n' + '\t\t\t</li>\n' + '\t\t\t<li>\n' + '\t\t\t\t<button type="button" ng-click="SimpleAction(\'italic\')" class="meditor-button-italic" ng-class="{ \'italic\': \'meditor-button--active\' }[styles.fontStyle]">\n' + '\t\t\t\t\tI\n' + '\t\t\t\t</button>\n' + '\t\t\t</li>\n' + '\t\t\t<li>\n' + '\t\t\t\t<button type="button" ng-click="SimpleAction(\'underline\')" class="meditor-button-underline" ng-class="{ \'underline\': \'meditor-button--active\' }[styles.textDecoration]">\n' + '\t\t\t\t\tU\n' + '\t\t\t\t</button>\n' + '\t\t\t</li>\n' + '\t\t\t<li>\n' + '\t\t\t\t<label class="meditor-select">\n' + '\t\t\t\t\t<select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>\n' + '\t\t\t\t</label>\n' + '\t\t\t</li>\n' + '\t\t\t<li>\n' + '\t\t\t\t<label class="meditor-select">\n' + '\t\t\t\t\t<select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>\n' + '\t\t\t\t</label>\n' + '\t\t\t</li>\n' + '\t\t</ul>\n' + '\t</div>\n' + '\t<div class="angular-meditor-content" ng-transclude></div>\n' + '</div>\n');
+    $templateCache.put('views/editor.html', '<div class="angular-meditor">\n' + '  <div class="angular-meditor-toolbar" style="top: {{ position.top }}px; left: {{ position.left }}px" ng-class="{ \'angular-meditor-toolbar--show\': showToolbar, \'angular-meditor-toolbar--bottom\': position.bellow }">\n' + '    <ul>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'bold\')" class="meditor-button-bold" ng-class="{ \'bold\': \'meditor-button--active\' }[styles.fontWeight]">\n' + '          B\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'italic\')" class="meditor-button-italic" ng-class="{ \'italic\': \'meditor-button--active\' }[styles.fontStyle]">\n' + '          I\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'underline\')" class="meditor-button-underline" ng-class="{ \'underline\': \'meditor-button--active\' }[styles.textDecoration]">\n' + '          U\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <label class="meditor-select">\n' + '          <select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>\n' + '        </label>\n' + '      </li>\n' + '      <li>\n' + '        <label class="meditor-select">\n' + '          <select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>\n' + '        </label>\n' + '      </li>\n' + '    </ul>\n' + '  </div>\n' + '  <div class="angular-meditor-content" ng-transclude></div>\n' + '</div>\n');
   }
 ]);
