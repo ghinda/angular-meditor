@@ -1,5 +1,9 @@
 node_modules
 .tmp
 .sass-cache
-*.kate-swp
+public/
 
+# Editor
+.kateproject
+.kateproject.d
+*.kate-swp
