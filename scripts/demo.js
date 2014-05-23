@@ -1,0 +1,1 @@
+var app=angular.module("meditorDemo",["ngRoute","angular-meditor"]).config(["$routeProvider",function(a){"use strict";a.when("/",{controller:"MainCtrl"}).otherwise({redirectTo:"/"})}]);app.controller("MainCtrl",["$rootScope",function(a){"use strict";return a.$on("$routeChangeSuccess",function(){})}]);
