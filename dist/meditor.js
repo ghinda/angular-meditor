@@ -99,7 +99,13 @@ angular.module('angular-meditor', []).directive('meditor', [
         };
         var checkSelection = function () {
           var newSelection = window.getSelection();
-          var parentNode = newSelection.anchorNode.parentNode;
+          var anchorNode = newSelection.anchorNode;
+          if (!anchorNode) {
+            return $timeout(function () {
+              scope.showToolbar = false;
+            });
+          }
+          var parentNode = anchorNode.parentNode;
           while (parentNode.tagName !== undefined && parentNode !== element[0]) {
             parentNode = parentNode.parentNode;
           }
@@ -151,11 +157,10 @@ angular.module('angular-meditor', []).directive('meditor', [
           showToolbarOnMouseup = true;
         });
         document.addEventListener('mouseup', function (e) {
-          if (!showToolbarOnMouseup) {
-            return;
+          if (showToolbarOnMouseup) {
+            showToolbarOnMouseup = false;
+            checkSelection(e);
           }
-          showToolbarOnMouseup = false;
-          checkSelection(e);
         }, false);
         var contentBlurTimer;
         $content.bind('blur', function () {

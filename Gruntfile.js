@@ -234,11 +234,11 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'usemin',
-    'copy:min'
+    'copy:min',
+    'jshint'
   ]);
 
   grunt.registerTask('default', [
-    'jshint',
     'build',
     'buildcontrol'
   ]);

@@ -140,7 +140,16 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         var newSelection = window.getSelection();
 
         // check if selection is in the current editor/directive container
-        var parentNode = newSelection.anchorNode.parentNode;
+        var anchorNode = newSelection.anchorNode;
+
+        if(!anchorNode) {
+          // hide the toolbar
+          return $timeout(function() {
+            scope.showToolbar = false;
+          });
+        }
+
+        var parentNode = anchorNode.parentNode;
         while (parentNode.tagName !== undefined && parentNode !== element[0]) {
           parentNode = parentNode.parentNode;
         }
@@ -217,12 +226,11 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       // the toolbar will show up if you started the selection from the container
       document.addEventListener('mouseup', function(e) {
 
-        if(!showToolbarOnMouseup) {
-          return;
+        if(showToolbarOnMouseup) {
+          //return;
+          showToolbarOnMouseup = false;
+          checkSelection(e);
         }
-
-        showToolbarOnMouseup = false;
-        checkSelection(e);
 
       }, false);
 
@@ -287,5 +295,5 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
 
     }
   };
-  
+
 }]);
