@@ -1,6 +1,7 @@
 angular.module('angular-meditor', []).directive('meditor', [
   '$timeout',
   function ($timeout) {
+    'use strict';
     return {
       scope: {},
       transclude: true,
@@ -150,21 +151,24 @@ angular.module('angular-meditor', []).directive('meditor', [
           showToolbarOnMouseup = true;
         });
         document.addEventListener('mouseup', function (e) {
-          if (!showToolbarOnMouseup)
-            return false;
+          if (!showToolbarOnMouseup) {
+            return;
+          }
           showToolbarOnMouseup = false;
           checkSelection(e);
         }, false);
         var contentBlurTimer;
         $content.bind('blur', function () {
-          if (contentBlurTimer)
+          if (contentBlurTimer) {
             clearTimeout(contentBlurTimer);
+          }
           contentBlurTimer = setTimeout(checkSelection, 200);
         });
         var selectBlurTimer;
         $selects.bind('blur', function () {
-          if (selectBlurTimer)
+          if (selectBlurTimer) {
             clearTimeout(selectBlurTimer);
+          }
           selectBlurTimer = setTimeout(checkSelection, 200);
         });
         scope.SimpleAction = function (action) {
@@ -184,7 +188,7 @@ angular.module('angular-meditor', []).directive('meditor', [
         });
         (function () {
           var wf = document.createElement('script');
-          wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+          wf.src = ('https:' === document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
           wf.type = 'text/javascript';
           wf.async = 'true';
           var s = document.getElementsByTagName('script')[0];

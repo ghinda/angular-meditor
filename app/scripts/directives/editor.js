@@ -2,6 +2,8 @@
  */
 
 angular.module('angular-meditor', []).directive('meditor', [ '$timeout', function ($timeout) {
+  'use strict';
+
   return {
     scope: {},
     transclude: true,
@@ -214,14 +216,21 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       // in case you select the text, but move the mouse outside the container
       // the toolbar will show up if you started the selection from the container
       document.addEventListener('mouseup', function(e) {
-        if(!showToolbarOnMouseup) return false;
+
+        if(!showToolbarOnMouseup) {
+          return;
+        }
+
         showToolbarOnMouseup = false;
         checkSelection(e);
+
       }, false);
 
       var contentBlurTimer;
       $content.bind('blur', function() {
-        if(contentBlurTimer) clearTimeout(contentBlurTimer);
+        if(contentBlurTimer) {
+          clearTimeout(contentBlurTimer);
+        }
         contentBlurTimer = setTimeout(checkSelection, 200);
       });
 
@@ -231,7 +240,9 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       // so I have to add a blur event to the selects.
       var selectBlurTimer;
       $selects.bind('blur', function() {
-        if(selectBlurTimer) clearTimeout(selectBlurTimer);
+        if(selectBlurTimer) {
+          clearTimeout(selectBlurTimer);
+        }
         selectBlurTimer = setTimeout(checkSelection, 200);
       });
 
@@ -266,7 +277,7 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       // to be able to dynamically load fonts
       (function() {
         var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        wf.src = ('https:' === document.location.protocol ? 'https' : 'http') +
         '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
         wf.type = 'text/javascript';
         wf.async = 'true';
@@ -275,5 +286,6 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       })();
 
     }
-  }
+  };
+  
 }]);

@@ -16,7 +16,9 @@ var app = angular.module('meditorDemo', [
 
 });
 
-app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $location, $timeout) {
-  return $rootScope.$on('$routeChangeSuccess', function(event, current) {
+app.controller('MainCtrl', function($rootScope) {
+  'use strict';
+
+  return $rootScope.$on('$routeChangeSuccess', function() {
   });
 });
