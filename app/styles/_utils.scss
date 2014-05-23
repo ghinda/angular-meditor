@@ -32,14 +32,3 @@ $em-base: 16 !default;
 
 /* Mixins */
 
-@mixin breakpoint($point) {
-	@if $point == papa-bear {
-		@media (min-width: 978px) { @content; }
-	}
-	@else if $point == mama-bear {
-		@media (min-width: 767px) { @content; }
-	}
-	@else if $point == baby-bear {
-		@media (min-width: 480px)  { @content; }
-	}
-}

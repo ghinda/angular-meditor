@@ -1,0 +1,102 @@
+/* angular-meditor demo
+ */
+
+/* Globals
+ */
+$color1: #2854a1;
+$color2: lighten(saturate($color1, 40%), 20%);
+$white: #fff;
+
+/* Utils
+ */
+@import "utils";
+
+
+/* Main
+ */
+
+body {
+	padding: emCalc(40);
+
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+	font-weight: normal;
+	font-size: emCalc(32);
+	letter-spacing: emCalc(-0.1);
+}
+
+a {
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.button {
+	box-shadow: inset 0 -2px 0 darken($color1, 10%);
+
+	&:hover {
+		background-color: lighten($color1, 5%);
+
+		text-decoration: none;
+	}
+
+	&:active {
+		background-color: darken($color1, 10%);
+
+		box-shadow: inset 0 2px 1px darken($color1, 20%);
+	}
+
+	&.secondary {
+		box-shadow: inset 0 -2px 0 darken($color2, 10%);
+
+		&:hover {
+			background-color: lighten($color2, 5%);
+		}
+
+		&:active {
+			background-color: darken($color2, 10%);
+
+			box-shadow: inset 0 2px 1px darken($color2, 20%);
+		}
+	}
+}
+
+.row {
+	max-width: emCalc(700);
+}
+
+header,
+footer,
+section {
+	padding: 0 0 emCalc(40);
+}
+
+/* Header
+ */
+header h1 {
+	margin: 0;
+
+	line-height: 1em;
+}
+
+/* Footer
+ */
+footer {
+	padding-top: emCalc(20);
+	border-top: 1px solid darken($white, 20%);
+
+	p {
+		font-size: .8em;
+	}
+}
+

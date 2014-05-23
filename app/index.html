@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>
+    angular-meditor: Simple floating text editor for Angular, inspired by Medium
+  </title>
+
+  <meta name="description" content="Simple floating text editor for Angular, inspired by Medium.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+
+  <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/css/foundation.min.css" rel="stylesheet" type="text/css">
+
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- build:css({.tmp,app}) styles/demo.css -->
+  <link rel="stylesheet" href="styles/demo.css">
+  <!-- endbuild -->
+
+  <!-- build:css({.tmp,app}) styles/meditor.css -->
+  <link rel="stylesheet" href="styles/meditor.css">
+  <!-- endbuild -->
+</head>
+<body ng-app="meditorDemo">
+
+  <!--[if lt IE 9]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <header class="row">
+    <div class="large-12 columns text-center">
+      <a href="https://github.com/ghinda/angular-meditor" class="button radius right">
+        <i class="fa fa-github"></i>
+        GitHub
+      </a>
+      <h1>angular-meditor</h1>
+    </div>
+  </header>
+
+
+  <section class="row">
+
+    <div class="large-12 columns" meditor>
+      <p>There is a hoary myth that anarchists do not believe in organization to promote revolutionary activity. This myth was raised from its resting place by Marcuse in a L'Express interview some months ago and reiterated again by Huey Newton in his "In Defence of Self-Defence," which New Left Notes decided to reprint in the recent National Convention issue. </p>
+
+      <p>To argue the question of "organization" versus "non-organization" is ridiculous; this issue has never been in dispute among serious anarchists, except perhaps for those lonely "individualists" whose ideology is rooted more in an extreme variant of classical liberalism than anarchy. Yes, anarchists believe in organization - in national organization and international organization. Anarchist organization have ranged from loose, highly decentralized groups to "vanguard" movements of many thousands, like the Spanish FAI, which functioned in a highly concerted fashion. </p>
+
+      <p>The real question at issue is not organization versus non-organization, but rather, what kind of organization. What different kinds of anarchist organizations have in common is that they are developed organically from below, not engineered into existence from above. They are social movements, combining a creative revolutionary life-style with a creative revolutionary theory, not political parties, whose node of life is indistinguishable from the surrounding rounding bourgeois environment and whose ideology is reduced to rigid "tried-and-tested programs." They try to reflect as much as is humanly possible the liberated society they seek to achieve, not slavishly duplicate the prevailing system of hierarchy, class, and authority. They are built around intimate groups of brothers and sisters, whose ability to act in common is based on initiative, convictions freely arrived at, and deep personal involvement, not a bureaucratic apparatus, fleshed out by docile memberships and manipulated from the top by a handful of all-knowing "leaders." </p>
+    </div>
+
+  </section>
+
+
+  <footer class="row">
+    <div class="large-7 columns">
+      <p>
+        <a href="http://ghinda.net/angular-meditor" class="copy">angular-meditor</a> is a project by <a href="http://ghinda.net">Ionuț Colceriu</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+
+  <!-- build:js scripts/plugins.js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/demo.js -->
+  <script src="scripts/demo.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/meditor.js -->
+  <script src="scripts/directives/editor.js"></script>
+  <!-- endbuild -->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-19824700-1', 'ghinda.net');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
