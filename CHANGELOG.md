@@ -1,6 +1,7 @@
 == 1.1.1 (May 24, 2014)
 
 * Fix issues with the toolbar not hiding in certain conditions, even if the selection was lost
+* Fix cross-browser issues with the toolbar positioning
 
 == 1.1 (May 23, 2014)
 

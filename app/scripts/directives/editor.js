@@ -133,11 +133,15 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         // center toolbar above selected text
         scope.position.left = leftPosition - (toolbarWidth/2) + (boundary.width/2);
 
+        // cross-browser window scroll positions
+        var scrollLeft = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+        var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+
         // add the scroll positions
         // because getBoundingClientRect gives us the position
         // relative to the viewport, not to the page
-        scope.position.top += $body[0].scrollTop;
-        scope.position.left += $body[0].scrollLeft;
+        scope.position.top += scrollTop;
+        scope.position.left += scrollLeft;
 
         return this;
       };
