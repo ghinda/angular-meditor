@@ -146,7 +146,7 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       var checkSelection = function () {
         var newSelection = window.getSelection();
 
-        // check if selection is in the current editor/directive container
+        // get selection node
         var anchorNode = newSelection.anchorNode;
 
         if(!anchorNode) {
@@ -156,6 +156,7 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
           });
         }
 
+        // check if selection is in the current editor/directive container
         var parentNode = anchorNode.parentNode;
         while (parentNode.tagName !== undefined && parentNode !== element[0]) {
           parentNode = parentNode.parentNode;
@@ -223,23 +224,12 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
 
       };
 
-      var showToolbarOnMouseup = false;
+      // check selection when selecting with the shift key
       $content.bind('keyup', checkSelection);
-      $content.bind('mousedown', function() {
-        showToolbarOnMouseup = true;
-      });
 
-      // in case you select the text, but move the mouse outside the container
-      // the toolbar will show up if you started the selection from the container
-      document.addEventListener('mouseup', function(e) {
-
-        if(showToolbarOnMouseup) {
-          //return;
-          showToolbarOnMouseup = false;
-          checkSelection(e);
-        }
-
-      }, false);
+      // check the selection on every mouseup
+      // it also triggeres when releasing outside the browser
+      document.addEventListener('mouseup', checkSelection);
 
       var contentBlurTimer;
       $content.bind('blur', function() {

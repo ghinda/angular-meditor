@@ -163,17 +163,8 @@ angular.module('angular-meditor', []).directive('meditor', [
             });
           });
         };
-        var showToolbarOnMouseup = false;
         $content.bind('keyup', checkSelection);
-        $content.bind('mousedown', function () {
-          showToolbarOnMouseup = true;
-        });
-        document.addEventListener('mouseup', function (e) {
-          if (showToolbarOnMouseup) {
-            showToolbarOnMouseup = false;
-            checkSelection(e);
-          }
-        }, false);
+        document.addEventListener('mouseup', checkSelection);
         var contentBlurTimer;
         $content.bind('blur', function () {
           if (contentBlurTimer) {
