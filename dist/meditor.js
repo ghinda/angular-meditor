@@ -105,8 +105,10 @@ angular.module('angular-meditor', []).directive('meditor', [
             scope.position.bellow = false;
           }
           scope.position.left = leftPosition - toolbarWidth / 2 + boundary.width / 2;
-          scope.position.top += $body[0].scrollTop;
-          scope.position.left += $body[0].scrollLeft;
+          var scrollLeft = window.pageXOffset !== undefined ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+          var scrollTop = window.pageYOffset !== undefined ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+          scope.position.top += scrollTop;
+          scope.position.left += scrollLeft;
           return this;
         };
         var checkSelection = function () {
