@@ -147,13 +147,21 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       };
 
       // get current selection and act on toolbar depending on it
-      var checkSelection = function () {
+      var checkSelection = function (e) {
+
+        // if you click something from the toolbar
+        // don't do anything
+        if(e && e.target && $toolbar.find(e.target).length) {
+          return false;
+        }
+
         var newSelection = window.getSelection();
 
         // get selection node
         var anchorNode = newSelection.anchorNode;
 
-        if(!anchorNode) {
+        // if nothing selected, hide the toolbar
+        if(newSelection.toString().trim() === '' || !anchorNode) {
           // hide the toolbar
           return $timeout(function() {
             scope.showToolbar = false;
@@ -170,12 +178,8 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         if(parentNode === element[0]) {
           // show the toolbar
           $timeout(function() {
-            if (newSelection.toString().trim() === '') {
-              scope.showToolbar = false;
-            } else {
-              scope.showToolbar = true;
-              setToolbarPosition();
-            }
+            scope.showToolbar = true;
+            setToolbarPosition();
           });
 
           // check selection styles and active buttons based on it
@@ -194,6 +198,8 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       var checkActiveButtons = function (selection) {
         var parentNode = selection.anchorNode;
 
+        //console.log(parentNode);
+
         if (!parentNode.tagName) {
           parentNode = selection.anchorNode.parentNode;
         }
@@ -209,21 +215,26 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
           // get real styles of selected element
           scope.styles = window.getComputedStyle(parentNode, null);
 
-          // set font family selector
-          angular.forEach(scope.familyOptions, function(family, i) {
-            if(scope.styles.fontFamily.indexOf(family.label) !== -1) {
-              scope.family = scope.familyOptions[i];
-              return false;
-            }
-          });
+          if(scope.styles.fontFamily !== scope.family.value) {
+            // set font family selector
+            angular.forEach(scope.familyOptions, function(family, i) {
+              if(scope.styles.fontFamily.indexOf(family.label) !== -1) {
+                scope.family = scope.familyOptions[i];
+                return false;
+              }
+            });
+          }
 
-          // set font size selector
-          angular.forEach(scope.sizeOptions, function(size, i) {
-            if(scope.styles.fontSize === (size.label + 'px')) {
-              scope.size = scope.sizeOptions[i].value;
-              return false;
-            }
-          });
+          if(scope.styles.fontSize !== scope.size.label + 'px') {
+            // set font size selector
+            angular.forEach(scope.sizeOptions, function(size, i) {
+              if(scope.styles.fontSize === (size.label + 'px')) {
+                scope.size = scope.sizeOptions[i].value;
+                return false;
+              }
+            });
+          }
+
         });
 
       };
@@ -263,6 +274,9 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
 
       // watch the font size selector
       scope.$watch('size', function() {
+        // TODO nasty firefox bug
+        // check for workaround
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1022904
         document.execCommand('styleWithCSS', false, true);
         document.execCommand('fontSize', false, scope.size);
       });
@@ -295,7 +309,7 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       })();
 
       // move the toolbar to the body, we can use overflow: hidden on containers
-      $body.append(element.find('.angular-meditor-toolbar'));
+      $body.append($toolbar);
 
     }
   };
