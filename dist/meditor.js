@@ -10,7 +10,7 @@ angular.module('angular-meditor', []).directive('meditor', [
         scope.position = {
           top: 10,
           left: 10,
-          bellow: false
+          below: false
         };
         scope.showToolbar = false;
         scope.sizeOptions = [
@@ -99,10 +99,10 @@ angular.module('angular-meditor', []).directive('meditor', [
           var leftPosition = boundary.left;
           if (boundary.top < toolbarHeight + spacing) {
             scope.position.top = topPosition + boundary.height + spacing;
-            scope.position.bellow = true;
+            scope.position.below = true;
           } else {
             scope.position.top = topPosition - toolbarHeight - spacing;
-            scope.position.bellow = false;
+            scope.position.below = false;
           }
           scope.position.left = leftPosition - toolbarWidth / 2 + boundary.width / 2;
           var scrollLeft = window.pageXOffset !== undefined ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
@@ -213,6 +213,6 @@ angular.module('angular-meditor').run([
   '$templateCache',
   function ($templateCache) {
     'use strict';
-    $templateCache.put('views/editor.html', '<div class="angular-meditor">\n' + '  <div class="angular-meditor-toolbar" style="top: {{ position.top }}px; left: {{ position.left }}px" ng-class="{ \'angular-meditor-toolbar--show\': showToolbar, \'angular-meditor-toolbar--bottom\': position.bellow }">\n' + '    <ul>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'bold\')" class="meditor-button-bold" ng-class="{ \'bold\': \'meditor-button--active\' }[styles.fontWeight]">\n' + '          B\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'italic\')" class="meditor-button-italic" ng-class="{ \'italic\': \'meditor-button--active\' }[styles.fontStyle]">\n' + '          I\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'underline\')" class="meditor-button-underline" ng-class="{ \'underline\': \'meditor-button--active\' }[styles.textDecoration]">\n' + '          U\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <label class="meditor-select">\n' + '          <select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>\n' + '        </label>\n' + '      </li>\n' + '      <li>\n' + '        <label class="meditor-select">\n' + '          <select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>\n' + '        </label>\n' + '      </li>\n' + '    </ul>\n' + '  </div>\n' + '  <div class="angular-meditor-content" ng-transclude></div>\n' + '</div>\n');
+    $templateCache.put('views/editor.html', '<div class="angular-meditor">\n' + '  <div class="angular-meditor-toolbar" style="top: {{ position.top }}px; left: {{ position.left }}px" ng-class="{ \'angular-meditor-toolbar--show\': showToolbar, \'angular-meditor-toolbar--bottom\': position.below }">\n' + '    <ul>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'bold\')" class="meditor-button-bold" ng-class="{ \'bold\': \'meditor-button--active\' }[styles.fontWeight]">\n' + '          B\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'italic\')" class="meditor-button-italic" ng-class="{ \'italic\': \'meditor-button--active\' }[styles.fontStyle]">\n' + '          I\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <button type="button" ng-click="SimpleAction(\'underline\')" class="meditor-button-underline" ng-class="{ \'underline\': \'meditor-button--active\' }[styles.textDecoration]">\n' + '          U\n' + '        </button>\n' + '      </li>\n' + '      <li>\n' + '        <label class="meditor-select">\n' + '          <select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>\n' + '        </label>\n' + '      </li>\n' + '      <li>\n' + '        <label class="meditor-select">\n' + '          <select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>\n' + '        </label>\n' + '      </li>\n' + '    </ul>\n' + '  </div>\n' + '  <div class="angular-meditor-content" ng-transclude></div>\n' + '</div>\n');
   }
 ]);
