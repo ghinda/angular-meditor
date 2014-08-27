@@ -111,10 +111,13 @@ angular.module('angular-meditor', []).directive('meditor', [
           scope.position.left += scrollLeft;
           return this;
         };
-        var checkSelection = function () {
+        var checkSelection = function (e) {
+          if (e && e.target && $toolbar.find(e.target).length) {
+            return false;
+          }
           var newSelection = window.getSelection();
           var anchorNode = newSelection.anchorNode;
-          if (!anchorNode) {
+          if (newSelection.toString().trim() === '' || !anchorNode) {
             return $timeout(function () {
               scope.showToolbar = false;
             });
@@ -125,12 +128,8 @@ angular.module('angular-meditor', []).directive('meditor', [
           }
           if (parentNode === element[0]) {
             $timeout(function () {
-              if (newSelection.toString().trim() === '') {
-                scope.showToolbar = false;
-              } else {
-                scope.showToolbar = true;
-                setToolbarPosition();
-              }
+              scope.showToolbar = true;
+              setToolbarPosition();
             });
             checkActiveButtons(newSelection);
           } else {
@@ -151,18 +150,14 @@ angular.module('angular-meditor', []).directive('meditor', [
           }
           $timeout(function () {
             scope.styles = window.getComputedStyle(parentNode, null);
-            angular.forEach(scope.familyOptions, function (family, i) {
-              if (scope.styles.fontFamily.indexOf(family.label) !== -1) {
-                scope.family = scope.familyOptions[i];
-                return false;
-              }
-            });
-            angular.forEach(scope.sizeOptions, function (size, i) {
-              if (scope.styles.fontSize === size.label + 'px') {
-                scope.size = scope.sizeOptions[i].value;
-                return false;
-              }
-            });
+            if (scope.styles.fontSize !== scope.size.label + 'px') {
+              angular.forEach(scope.sizeOptions, function (size, i) {
+                if (scope.styles.fontSize === size.label + 'px') {
+                  scope.size = scope.sizeOptions[i].value;
+                  return false;
+                }
+              });
+            }
           });
         };
         $content.bind('keyup', checkSelection);
@@ -186,7 +181,7 @@ angular.module('angular-meditor', []).directive('meditor', [
           document.execCommand(action, false, null);
         };
         scope.$watch('size', function () {
-          document.execCommand('styleWithCSS', false, true);
+          document.execCommand('styleWithCSS', false, false);
           document.execCommand('fontSize', false, scope.size);
         });
         scope.$watch('family', function () {
@@ -204,7 +199,7 @@ angular.module('angular-meditor', []).directive('meditor', [
           var s = document.getElementsByTagName('script')[0];
           s.parentNode.insertBefore(wf, s);
         }());
-        $body.append(element.find('.angular-meditor-toolbar'));
+        $body.append($toolbar);
       }
     };
   }

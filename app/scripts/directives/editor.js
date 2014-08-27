@@ -198,8 +198,6 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       var checkActiveButtons = function (selection) {
         var parentNode = selection.anchorNode;
 
-        //console.log(parentNode);
-
         if (!parentNode.tagName) {
           parentNode = selection.anchorNode.parentNode;
         }
@@ -214,16 +212,6 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         $timeout(function() {
           // get real styles of selected element
           scope.styles = window.getComputedStyle(parentNode, null);
-
-          if(scope.styles.fontFamily !== scope.family.value) {
-            // set font family selector
-            angular.forEach(scope.familyOptions, function(family, i) {
-              if(scope.styles.fontFamily.indexOf(family.label) !== -1) {
-                scope.family = scope.familyOptions[i];
-                return false;
-              }
-            });
-          }
 
           if(scope.styles.fontSize !== scope.size.label + 'px') {
             // set font size selector
@@ -277,8 +265,12 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         // TODO nasty firefox bug
         // check for workaround
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1022904
-        document.execCommand('styleWithCSS', false, true);
+        //document.execCommand('styleWithCSS', false, true);
+
+        document.execCommand('styleWithCSS', false, false);
         document.execCommand('fontSize', false, scope.size);
+
+
       });
 
       // watch the font family selector
