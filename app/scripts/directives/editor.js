@@ -262,15 +262,8 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
 
       // watch the font size selector
       scope.$watch('size', function() {
-        // TODO nasty firefox bug
-        // check for workaround
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=1022904
-        //document.execCommand('styleWithCSS', false, true);
-
         document.execCommand('styleWithCSS', false, false);
         document.execCommand('fontSize', false, scope.size);
-
-
       });
 
       // watch the font family selector
