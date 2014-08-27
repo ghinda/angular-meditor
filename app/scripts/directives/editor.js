@@ -14,7 +14,7 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       scope.position = {
         top: 10,
         left: 10,
-        bellow: false
+        below: false
       };
 
       scope.showToolbar = false;
@@ -106,7 +106,7 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
       // edit all the things
       $content.attr('contenteditable', true);
 
-      // position the toolbar above or bellow the selected text
+      // position the toolbar above or below the selected text
       var setToolbarPosition = function () {
         var toolbarHeight = $toolbar[0].offsetHeight;
         var toolbarWidth = $toolbar[0].offsetWidth;
@@ -122,12 +122,12 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
         // of the selection
         if(boundary.top < (toolbarHeight + spacing)) {
           scope.position.top = topPosition + boundary.height + spacing;
-          // tell me if it's above or bellow the selection
-          // used in the template to place the triangle above or bellow
-          scope.position.bellow = true;
+          // tell me if it's above or below the selection
+          // used in the template to place the triangle above or below
+          scope.position.below = true;
         } else {
           scope.position.top = topPosition - toolbarHeight - spacing;
-          scope.position.bellow = false;
+          scope.position.below = false;
         }
 
         // center toolbar above selected text
