@@ -1,4 +1,4 @@
-== 1.2 (August 27, 2014)
+== 1.2.0 (August 27, 2014)
 
 * Change the behavior of the `font-size` selector, to not use `styleWithCSS`, and generate a `<font>` tag. This is required so that we can have consistent behavior between browsers - Firefox does not respect the `styleWithCSS` flag on `fontSize` and was generating `<font>` tags anyway. https://bugzilla.mozilla.org/show_bug.cgi?id=1022904
 
