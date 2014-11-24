@@ -1,14 +1,28 @@
 /* angular-meditor directive
  */
 
-angular.module('angular-meditor', []).directive('meditor', [ '$timeout', function ($timeout) {
+angular.module('angular-meditor', [])
+.directive('meditor', [ '$timeout', function ($timeout) {
   'use strict';
 
   return {
-    scope: {},
+    scope: {
+      ngModel: '='
+    },
+    require: '?ngModel',
     transclude: true,
     templateUrl: 'views/editor.html',
-    link: function (scope, element, attributes) {
+    link: function (scope, element, attributes, ctrl) {
+
+      scope.model = {
+        ngModel: scope.ngModel
+      };
+
+      scope.$watch('model.ngModel', function() {
+        $timeout(function(){
+          scope.ngModel = scope.model.ngModel;
+        });
+      });
 
       // toolbar position
       scope.position = {
@@ -299,4 +313,24 @@ angular.module('angular-meditor', []).directive('meditor', [ '$timeout', functio
     }
   };
 
-}]);
+}])
+.directive('meditorContenteditable', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl) {
+
+      elm.on('blur keyup', function() {
+        scope.$apply(function() {
+          ctrl.$setViewValue(elm.html());
+        });
+      });
+
+      ctrl.$render = function() {
+        elm.html(ctrl.$viewValue);
+      };
+
+      ctrl.$setViewValue(scope.ngModel);
+      elm.html(ctrl.$viewValue);
+    }
+  };
+});
