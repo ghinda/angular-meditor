@@ -5,7 +5,7 @@
 /* Utils
  */
 /* Utils
- */
+*/
 /* Mixins */
 .angular-meditor {
   position: relative; }
@@ -65,7 +65,7 @@
     height: 2.25em;
     margin: 0;
     padding: 0.5em 0.75em;
-    background-color: #222222;
+    background-color: #222;
     border-width: 1px 0 0 0;
     border-color: #2f2f2f;
     border-style: solid;

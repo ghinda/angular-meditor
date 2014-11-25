@@ -315,6 +315,8 @@ angular.module('angular-meditor', [])
 
 }])
 .directive('meditorContenteditable', function() {
+  'use strict';
+  
   return {
     require: '?ngModel',
     link: function(scope, elm, attrs, ctrl) {

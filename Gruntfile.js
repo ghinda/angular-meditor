@@ -55,7 +55,7 @@ module.exports = function (grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, './')
+              mountFolder(connect, yeomanConfig.demo)
             ];
           }
         }
@@ -169,7 +169,7 @@ module.exports = function (grunt) {
         dest: '.tmp/scripts/templates.js'
       }
     },
-    ngmin: {
+    ngAnnotate: {
       dist: {
         files: [{
           expand: true,
@@ -221,7 +221,7 @@ module.exports = function (grunt) {
     'ngtemplates',
     'copy:demo',
     'concat',
-    'ngmin',
+    'ngAnnotate',
     'copy:max',
     'cssmin',
     'uglify',
