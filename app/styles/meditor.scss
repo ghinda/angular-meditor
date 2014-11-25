@@ -86,8 +86,6 @@ $toolbarText: #efefef;
     font-size: 1em;
     color: $toolbarText;
 
-    //-webkit-appearance: none;
-
     @include transition (all .1s);
 
     &:hover {
