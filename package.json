@@ -14,7 +14,6 @@
     "grunt-contrib-htmlmin": "~0.2.x",
     "grunt-contrib-watch": "~0.6.x",
     "grunt-usemin": "~2.x",
-    "grunt-concurrent": "~0.3.0",
     "connect-livereload": "~0.2.0",
     "matchdep": "~0.1.2",
     "grunt-ngmin": "~0.0.2",

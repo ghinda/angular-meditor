@@ -20,7 +20,7 @@ app.controller('MainCtrl', function($scope, $rootScope) {
   'use strict';
 
   var model = $scope.model = {};
-  model.text = 'Text from a model.';
+  model.text = 'anguar-meditor using ng-model.';
 
   return $rootScope.$on('$routeChangeSuccess', function() {
   });

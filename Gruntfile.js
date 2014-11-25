@@ -158,15 +158,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    concurrent: {
-      server: [
-        'sass:server'
-      ],
-      dist: [
-        'sass:dist',
-        'htmlmin'
-      ]
-    },
     ngtemplates: {
       dist: {
         options: {
@@ -216,7 +207,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'concurrent:server',
+      'sass:server',
       'connect:livereload',
       'watch'
     ]);
@@ -224,7 +215,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'concurrent:dist',
+    'sass:dist',
+    'htmlmin',
     'useminPrepare',
     'ngtemplates',
     'copy:demo',

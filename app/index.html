@@ -55,13 +55,17 @@
 
     </div>
 
-    {{ model.text }}
+
 
     <div class="large-12 columns">
 
       <h2>
         With <code>ng-model</code>
       </h2>
+
+      <pre>
+model.text = {{ model.text }}
+      </pre>
 
       <p meditor ng-model="model.text"></p>
 

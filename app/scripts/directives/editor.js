@@ -15,7 +15,8 @@ angular.module('angular-meditor', [])
     link: function (scope, element, attributes, ctrl) {
 
       scope.model = {
-        ngModel: scope.ngModel
+        ngModel: scope.ngModel,
+        showToolbar: false
       };
 
       scope.$watch('model.ngModel', function() {
@@ -30,8 +31,6 @@ angular.module('angular-meditor', [])
         left: 10,
         below: false
       };
-
-      scope.showToolbar = false;
 
       // fontSize options
       scope.sizeOptions = [
@@ -112,13 +111,23 @@ angular.module('angular-meditor', [])
         'u': ''
       };
 
+      // Remy Sharp's debounce
+      // https://remysharp.com/2010/07/21/throttling-function-calls
+      var debounce = function(fn, delay) {
+        var timer = null;
+        return function () {
+          var context = this, args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            fn.apply(context, args);
+          }, delay);
+        };
+      };
+
       var $toolbar = element.find('.angular-meditor-toolbar');
       var $content = element.find('.angular-meditor-content');
       var $selects = element.find('select');
       var $body = angular.element('body');
-
-      // edit all the things
-      $content.attr('contenteditable', true);
 
       // position the toolbar above or below the selected text
       var setToolbarPosition = function () {
@@ -178,7 +187,7 @@ angular.module('angular-meditor', [])
         if(newSelection.toString().trim() === '' || !anchorNode) {
           // hide the toolbar
           return $timeout(function() {
-            scope.showToolbar = false;
+            scope.model.showToolbar = false;
           });
         }
 
@@ -192,7 +201,7 @@ angular.module('angular-meditor', [])
         if(parentNode === element[0]) {
           // show the toolbar
           $timeout(function() {
-            scope.showToolbar = true;
+            scope.model.showToolbar = true;
             setToolbarPosition();
           });
 
@@ -201,7 +210,7 @@ angular.module('angular-meditor', [])
         } else {
           // hide the toolbar
           $timeout(function() {
-            scope.showToolbar = false;
+            scope.model.showToolbar = false;
           });
         }
 
@@ -216,7 +225,6 @@ angular.module('angular-meditor', [])
           parentNode = selection.anchorNode.parentNode;
         }
 
-        // TODO underline button activation not working properly
         var childNode = parentNode.childNodes[0];
 
         if(childNode && childNode.tagName && childNode.tagName.toLowerCase() in generatedTags) {
@@ -246,27 +254,19 @@ angular.module('angular-meditor', [])
 
       // check the selection on every mouseup
       // it also triggeres when releasing outside the browser
-      document.addEventListener('mouseup', checkSelection);
 
-      var contentBlurTimer;
-      $content.bind('blur', function() {
-        if(contentBlurTimer) {
-          clearTimeout(contentBlurTimer);
-        }
-        contentBlurTimer = setTimeout(checkSelection, 200);
-      });
+      // use debounce to fix issue with Chrome
+      // getting the right selection only after a delay
+      // if selecting text, then single-clicking the selected text
+      document.addEventListener('mouseup', debounce(checkSelection, 200));
+
+      $content.bind('blur', debounce(checkSelection, 200));
 
       // if after a selection in the select,
       // the contenteditable doesn't get the focus
       // the toolbar will not hide on blur.
       // so I have to add a blur event to the selects.
-      var selectBlurTimer;
-      $selects.bind('blur', function() {
-        if(selectBlurTimer) {
-          clearTimeout(selectBlurTimer);
-        }
-        selectBlurTimer = setTimeout(checkSelection, 200);
-      });
+      $selects.bind('blur', debounce(checkSelection, 200));
 
       // simple edit action - bold, italic, underline
       scope.SimpleAction = function(action) {
@@ -316,21 +316,27 @@ angular.module('angular-meditor', [])
 }])
 .directive('meditorContenteditable', function() {
   return {
-    require: 'ngModel',
+    require: '?ngModel',
     link: function(scope, elm, attrs, ctrl) {
 
-      elm.on('blur keyup', function() {
-        scope.$apply(function() {
-          ctrl.$setViewValue(elm.html());
+      // don't throw an error without ng-model
+      if(scope.ngModel) {
+
+        elm.on('blur keyup', function() {
+          scope.$apply(function() {
+            ctrl.$setViewValue(elm.html());
+          });
         });
-      });
 
-      ctrl.$render = function() {
+        ctrl.$render = function() {
+          elm.html(ctrl.$viewValue);
+        };
+
+        ctrl.$setViewValue(scope.ngModel);
         elm.html(ctrl.$viewValue);
-      };
 
-      ctrl.$setViewValue(scope.ngModel);
-      elm.html(ctrl.$viewValue);
+      }
+
     }
   };
 });
