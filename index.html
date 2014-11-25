@@ -16,11 +16,11 @@
 
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-  <link rel="stylesheet" href="styles/demo.css"/>
+  <link rel="stylesheet" href="styles/demo.css">
 
-  <link rel="stylesheet" href="styles/meditor.css"/>
+  <link rel="stylesheet" href="styles/meditor.css">
 </head>
-<body ng-app="meditorDemo">
+<body ng-app="meditorDemo" ng-controller="MainCtrl">
 
   <!--[if lt IE 9]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -40,11 +40,31 @@
   <section class="row">
 
     <div class="large-12 columns" meditor>
-      <p>There is a hoary myth that anarchists do not believe in organization to promote revolutionary activity. This myth was raised from its resting place by Marcuse in a L'Express interview some months ago and reiterated again by Huey Newton in his "In Defence of Self-Defence," which New Left Notes decided to reprint in the recent National Convention issue. </p>
 
-      <p>To argue the question of "organization" versus "non-organization" is ridiculous; this issue has never been in dispute among serious anarchists, except perhaps for those lonely "individualists" whose ideology is rooted more in an extreme variant of classical liberalism than anarchy. Yes, anarchists believe in organization - in national organization and international organization. Anarchist organization have ranged from loose, highly decentralized groups to "vanguard" movements of many thousands, like the Spanish FAI, which functioned in a highly concerted fashion. </p>
+      <h2>
+        With inline content
+      </h2>
 
-      <p>The real question at issue is not organization versus non-organization, but rather, what kind of organization. What different kinds of anarchist organizations have in common is that they are developed organically from below, not engineered into existence from above. They are social movements, combining a creative revolutionary life-style with a creative revolutionary theory, not political parties, whose node of life is indistinguishable from the surrounding rounding bourgeois environment and whose ideology is reduced to rigid "tried-and-tested programs." They try to reflect as much as is humanly possible the liberated society they seek to achieve, not slavishly duplicate the prevailing system of hierarchy, class, and authority. They are built around intimate groups of brothers and sisters, whose ability to act in common is based on initiative, convictions freely arrived at, and deep personal involvement, not a bureaucratic apparatus, fleshed out by docile memberships and manipulated from the top by a handful of all-knowing "leaders." </p>
+      <blockquote>
+        To argue the question of "organization" versus "non-organization" is ridiculous; this issue has never been in dispute among serious anarchists, except perhaps for those lonely "individualists" whose ideology is rooted more in an extreme variant of classical liberalism than anarchy. Yes, anarchists believe in organization - in national organization and international organization. Anarchist organization have ranged from loose, highly decentralized groups to "vanguard" movements of many thousands, like the Spanish FAI, which functioned in a highly concerted fashion.
+      </blockquote>
+
+    </div>
+
+
+
+    <div class="large-12 columns">
+
+      <h2>
+        With <code>ng-model</code>
+      </h2>
+
+      <pre>
+model.text = {{ model.text }}
+      </pre>
+
+      <p meditor ng-model="model.text"></p>
+
     </div>
 
   </section>
