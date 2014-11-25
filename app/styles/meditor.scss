@@ -14,10 +14,6 @@ $toolbarText: #efefef;
 
 .angular-meditor {
   position: relative;
-
-  .angular-meditor-content {
-
-  }
 }
 
 .angular-meditor-toolbar {
@@ -124,7 +120,7 @@ $toolbarText: #efefef;
   }
 }
 
- .angular-meditor-toolbar--show {
+.angular-meditor-toolbar--show {
   opacity: 1;
   z-index: 999999;
 
