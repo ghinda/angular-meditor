@@ -272,12 +272,18 @@ angular.module('angular-meditor', [])
       scope.SimpleAction = function(action) {
         document.execCommand('styleWithCSS', false, false);
         document.execCommand(action, false, null);
+
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
       };
 
       // watch the font size selector
       scope.$watch('size', function() {
         document.execCommand('styleWithCSS', false, false);
         document.execCommand('fontSize', false, scope.size);
+
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
       });
 
       // watch the font family selector
@@ -293,6 +299,9 @@ angular.module('angular-meditor', [])
 
         document.execCommand('styleWithCSS', false, true);
         document.execCommand('fontName', false, scope.family.value);
+
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
       });
 
       // load google webfont library
@@ -314,7 +323,7 @@ angular.module('angular-meditor', [])
   };
 
 }])
-.directive('meditorContenteditable', function() {
+.directive('meditorContenteditable', [ '$timeout', function($timeout) {
   'use strict';
   
   return {
@@ -324,11 +333,17 @@ angular.module('angular-meditor', [])
       // don't throw an error without ng-model
       if(scope.ngModel) {
 
-        elm.on('blur keyup', function() {
-          scope.$apply(function() {
+        var change = function() {
+          $timeout(function() {
             ctrl.$setViewValue(elm.html());
           });
-        });
+        };
+
+        // custom event to change the ngModel after using
+        // actions from the editor
+        scope.$on('meditor-change', change);
+
+        elm.on('blur keyup', change);
 
         ctrl.$render = function() {
           elm.html(ctrl.$viewValue);
@@ -337,8 +352,18 @@ angular.module('angular-meditor', [])
         ctrl.$setViewValue(scope.ngModel);
         elm.html(ctrl.$viewValue);
 
+        scope.$watch('ngModel', function(ngModel) {
+          // change the html only if it's different from the model
+          // eg. on outside changes
+          // so we don't lose the selection when editing with the
+          // editor toolbar
+          if(elm.html() !== ngModel) {
+            elm.html(ngModel);
+          }
+        });
+
       }
 
     }
   };
-});
+}]);

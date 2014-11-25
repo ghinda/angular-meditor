@@ -1,3 +1,12 @@
+== 1.3.1 (November 25, 2014)
+
+* Hotfixes for the two-way binding functionality.
+
+== 1.3.0 (November 25, 2014)
+
+* Implement two-way binding using `ng-model`.
+* Editor toolbar positioning fixes for when single-clicking a selection was still showing the toolbar with wrong positioning.
+
 == 1.2.0 (August 27, 2014)
 
 * Change the behavior of the `font-size` selector, to not use `styleWithCSS`, and generate a `<font>` tag. This is required so that we can have consistent behavior between browsers - Firefox does not respect the `styleWithCSS` flag on `fontSize` and was generating `<font>` tags anyway. https://bugzilla.mozilla.org/show_bug.cgi?id=1022904
