@@ -13,3 +13,8 @@ Features
 * Dynamic font family loading from Google Fonts
 * Multiple editors on a single page
 * Edit existing content with transclusion
+
+Contributors
+------------
+
+[List of contributors](https://github.com/ghinda/angular-meditor/graphs/contributors)
