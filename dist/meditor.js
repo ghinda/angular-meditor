@@ -7,7 +7,8 @@ angular.module('angular-meditor', [])
 
   return {
     scope: {
-      ngModel: '='
+      ngModel: '=',
+      parentContainer: '@'
     },
     require: '?ngModel',
     transclude: true,
@@ -127,7 +128,7 @@ angular.module('angular-meditor', [])
       var $toolbar = element.find('.angular-meditor-toolbar');
       var $content = element.find('.angular-meditor-content');
       var $selects = element.find('select');
-      var $body = angular.element(document.querySelector(element.attr('parentSelector')) || document.body);
+      var $body = angular.element(document.querySelector(scope.parentContainer) || document.body);
 
       // position the toolbar above or below the selected text
       var setToolbarPosition = function () {
