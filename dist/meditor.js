@@ -125,9 +125,9 @@ angular.module('angular-meditor', [])
         };
       };
 
-      var $toolbar = element.find('.angular-meditor-toolbar');
-      var $content = element.find('.angular-meditor-content');
-      var $selects = element.find('select');
+      var $toolbar = angular.element(element[0].querySelector('.angular-meditor-toolbar'));
+      var $content = angular.element(element[0].querySelector('.angular-meditor-content'));
+      var $selects = angular.element(element[0].querySelector('select'));
       var $body = angular.element(document.querySelector(scope.parentContainer) || document.body);
 
       // position the toolbar above or below the selected text
