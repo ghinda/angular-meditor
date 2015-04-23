@@ -72,9 +72,9 @@
     box-shadow: none;
     font-size: 1em;
     color: #efefef;
-    -webkit-transition: all 0.1s;
-    -moz-transition: all 0.1s;
-    transition: all 0.1s; }
+    -webkit-transition: all .1s;
+    -moz-transition: all .1s;
+    transition: all .1s; }
     .angular-meditor-toolbar button:hover, .angular-meditor-toolbar select:hover {
       cursor: pointer;
       background-color: #151515; }
