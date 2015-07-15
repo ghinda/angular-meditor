@@ -331,7 +331,7 @@ angular.module('angular-meditor', [])
     link: function(scope, elm, attrs, ctrl) {
 
       // don't throw an error without ng-model
-      if(scope.ngModel) {
+      if(typeof(scope.ngModel) !== 'undefined') {
 
         var change = function() {
           $timeout(function() {
