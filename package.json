@@ -16,7 +16,7 @@
     "grunt-usemin": "~2.x",
     "connect-livereload": "~0.5.1",
     "matchdep": "~0.3.0",
-    "grunt-ng-annotate": "~0.7.x",
+    "grunt-ng-annotate": "^1.0.1",
     "grunt-angular-templates": "~0.5.x",
     "grunt-sass": "~0",
     "grunt-build-control": "0.1.x"
