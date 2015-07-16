@@ -1,6 +1,11 @@
 {
   "name": "angular-meditor",
   "version": "1.3.2",
+  "author": "Ionut Colceriu <contact@ghinda.net>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghinda/angular-meditor.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.x",
