@@ -1,4 +1,4 @@
-== 1.4.0 (2015-07-16)
+== 1.4.1 (2015-07-16)
 
 * Fix issues when ngModel would be defined, but falsy. Allow ngModel to be falsy by stricly checking it's type. Contribution by [Simon Elliott](https://github.com/purge).
 * Allow a custom parent container for the toolbar (instead of inserting it in the body), using the `toolbarContainer` attribute. Contribution by [Antonin Januska](https://github.com/AntJanus).
