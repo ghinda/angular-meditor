@@ -128,7 +128,7 @@ angular.module('angular-meditor', [])
       var $content = angular.element(element[0].querySelector('.angular-meditor-content'));
       var $selects = angular.element(element[0].querySelector('select'));
       var $body = angular.element(document.body);
-      
+
       // position the toolbar above or below the selected text
       var setToolbarPosition = function () {
         var toolbarHeight = $toolbar[0].offsetHeight;
@@ -325,13 +325,13 @@ angular.module('angular-meditor', [])
 }])
 .directive('meditorContenteditable', [ '$timeout', function($timeout) {
   'use strict';
-  
+
   return {
     require: '?ngModel',
     link: function(scope, elm, attrs, ctrl) {
 
       // don't throw an error without ng-model
-      if(scope.ngModel) {
+      if(typeof scope.ngModel !== 'undefined') {
 
         var change = function() {
           $timeout(function() {
