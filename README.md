@@ -1,5 +1,7 @@
-angular-meditor [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ghinda&url=https://github.com/ghinda/angular-meditor&title=angular-meditor&language=javascript&tags=github&category=software)
+angular-meditor
 ===============
+
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ghinda&url=https://github.com/ghinda/angular-meditor&title=angular-meditor&language=javascript&tags=github&category=software)
 
 Simple floating text editor for Angular, inspired by Medium.
 
