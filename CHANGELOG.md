@@ -1,3 +1,8 @@
+== 1.3.3 (2015-07-16)
+
+* Fix issues when ngModel would be defined, but falsy. Allow ngModel to be falsy by stricly checking it's type. Contribution by [Simon Elliott](https://github.com/purge).
+* 
+
 == 1.3.2 (2015-04-22)
 
 * Remove the jQuery dependency. Contributions by [Antonin Januska](https://github.com/AntJanus).
@@ -37,4 +42,3 @@
 == 1.0.0 (2013-11-11)
 
 * Initial release.
-
