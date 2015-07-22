@@ -9,6 +9,12 @@ As used by [Business Card Maker](http://bizcardmaker.com/).
 
 Inspired by Medium and [MediumEditor](https://github.com/daviferreira/medium-editor).
 
+## Modifications done
+--------
+* Removing the font-family button from the toolbar
+* Removing the underline button from the toolbar
+* Only showing to font-sizes on the tollbar
+
 Features
 --------
 
