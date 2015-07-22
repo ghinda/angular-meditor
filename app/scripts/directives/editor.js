@@ -39,11 +39,11 @@ angular.module('angular-meditor', [])
       // fontSize options
       scope.sizeOptions = [
         {
-          label: '11',
+          label: '10',
           value: 1
         },
         {
-          label: '15',
+          label: '16',
           value: 2
         }
       ];
