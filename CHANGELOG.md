@@ -1,3 +1,7 @@
+== 1.4.2 (2015-10-6)
+
+* Add the `main` property with the library files to the `bower.json` and `package.json` files.
+
 == 1.4.1 (2015-07-16)
 
 * Fix issues when ngModel would be defined, but falsy. Allow ngModel to be falsy by stricly checking it's type. Contribution by [Simon Elliott](https://github.com/purge).

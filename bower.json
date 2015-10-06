@@ -1,8 +1,12 @@
 {
   "name": "angular-meditor",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "authors": [
     "Ionut Colceriu <contact@ghinda.net>"
+  ],
+  "main": [
+    "dist/meditor.css",
+    "dist/meditor.js"
   ],
   "ignore": [
     "node_modules/",
