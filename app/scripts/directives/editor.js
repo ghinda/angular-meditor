@@ -1,4 +1,7 @@
-/* angular-meditor directive
+/*
+ * angular-meditor directive
+ * Modified by the iAdvize team
+ * https://github.com/iadvize/angular-meditor
  */
 
 angular.module('angular-meditor', [])
@@ -40,63 +43,11 @@ angular.module('angular-meditor', [])
           value: 1
         },
         {
-          label: '13',
-          value: 2
-        },
-        {
           label: '16',
-          value: 3
-        },
-        {
-          label: '18',
-          value: 4
-        },
-        {
-          label: '24',
-          value: 5
-        },
-        {
-          label: '32',
-          value: 6
-        },
-        {
-          label: '48',
-          value: 7
+          value: 2
         }
       ];
       scope.size = scope.sizeOptions[0].value;
-
-      scope.familyOptions = [
-        {
-          label: 'Open Sans',
-          value: 'Open Sans, sans-serif'
-        },
-        {
-          label: 'Source Sans Pro',
-          value: 'Source Sans Pro, sans-serif'
-        },
-        {
-          label: 'Exo',
-          value: 'Exo, sans-serif'
-        },
-        {
-          label: 'Oswald',
-          value: 'Oswald, sans-serif'
-        },
-        {
-          label: 'Cardo',
-          value: 'Cardo, serif'
-        },
-        {
-          label: 'Vollkorn',
-          value: 'Vollkorn, serif'
-        },
-        {
-          label: 'Old Standard TT',
-          value: 'Old Standard TT, serif'
-        }
-      ];
-      scope.family = scope.familyOptions[0];
 
       // current styles of selected elements
       // used to highlight active buttons
@@ -286,36 +237,6 @@ angular.module('angular-meditor', [])
         // custom event for two-way binding
         scope.$broadcast('meditor-change');
       });
-
-      // watch the font family selector
-      scope.$watch('family', function() {
-        // dynamically load the family from google fonts
-        if(window.WebFont) {
-          WebFont.load({
-            google: {
-              families: [ scope.family.label ]
-            }
-          });
-        }
-
-        document.execCommand('styleWithCSS', false, true);
-        document.execCommand('fontName', false, scope.family.value);
-
-        // custom event for two-way binding
-        scope.$broadcast('meditor-change');
-      });
-
-      // load google webfont library
-      // to be able to dynamically load fonts
-      (function() {
-        var wf = document.createElement('script');
-        wf.src = ('https:' === document.location.protocol ? 'https' : 'http') +
-        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-      })();
 
       // move the toolbar to the body, we can use overflow: hidden on containers
       $body.append($toolbar);
