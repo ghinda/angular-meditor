@@ -17,6 +17,21 @@
         </button>
       </li>
       <li>
+        <button type="button" ng-click="alignment = 'left'" class="meditor-button-align-left">
+          Align Left
+        </button>
+      </li>
+      <li>
+        <button type="button" ng-click="alignment = 'center'" class="meditor-button-align-center" >
+          Align Center
+        </button>
+      </li>
+      <li>
+        <button type="button" ng-click="alignment = 'right'" class="meditor-button-align-right">
+          Align Right
+        </button>
+      </li>
+      <li>
         <label class="meditor-select">
           <select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>
         </label>
@@ -28,6 +43,5 @@
       </li>
     </ul>
   </div>
-
   <div class="angular-meditor-content" contenteditable meditor-contenteditable ng-model="model.ngModel" ng-transclude></div>
 </div>

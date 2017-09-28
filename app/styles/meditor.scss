@@ -104,6 +104,18 @@ $toolbarText: #efefef;
     width: emCalc(40);
   }
 
+  .meditor-button-align-center {
+    width: emCalc(70);
+  }
+
+  .meditor-button-align-left {
+    width: emCalc(70);
+  }
+
+ .meditor-button-align-right {
+    width: emCalc(70);  
+  }
+
   .meditor-button--active {
     background-color: darken($toolbarBackground, 5%);
     border-width: 0 0 1px 0;

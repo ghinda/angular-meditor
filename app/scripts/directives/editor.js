@@ -12,7 +12,7 @@ angular.module('angular-meditor', [])
     },
     require: '?ngModel',
     transclude: true,
-    templateUrl: 'views/editor.html',
+    templateUrl: 'app/views/editor.html',
     link: function (scope, element, attributes, ctrl) {
 
       scope.model = {
@@ -32,6 +32,8 @@ angular.module('angular-meditor', [])
         left: 10,
         below: false
       };
+
+      scope.alignment = 'center';
 
       // fontSize options
       scope.sizeOptions = [
@@ -277,6 +279,31 @@ angular.module('angular-meditor', [])
         // custom event for two-way binding
         scope.$broadcast('meditor-change');
       };
+
+      // watch the alignment selector
+      scope.$watch('alignment', function(newValue, oldValue) {
+
+        if(newValue === oldValue)
+        {
+          return;
+        }
+
+        var command = 'justifyCenter';
+        switch(newValue) {
+          case 'left':
+              command = 'justifyLeft'
+          break;
+          case 'right':
+            command = 'justifyRight'
+          break;
+        }
+
+        document.execCommand('styleWithCSS', false, false);
+        document.execCommand(command, false, null);
+
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
+      });
 
       // watch the font size selector
       scope.$watch('size', function() {
