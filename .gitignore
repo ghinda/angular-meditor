@@ -7,3 +7,5 @@ public/
 .kateproject
 .kateproject.d
 *.kate-swp
+
+dist

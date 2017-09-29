@@ -68,7 +68,8 @@ $toolbarText: #efefef;
   }
 
   button,
-  select {
+  select,
+  input[type=color] {
     float: left;
     height: emCalc(36);
     margin: 0;
@@ -102,6 +103,18 @@ $toolbarText: #efefef;
 
   button {
     width: emCalc(40);
+  }
+
+  .meditor-button-align-center {
+  }
+
+  .meditor-button-align-left {
+  }
+
+ .meditor-button-align-right {
+  }
+
+  .meditor-button-align-justify{
   }
 
   .meditor-button--active {
