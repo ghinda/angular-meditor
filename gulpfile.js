@@ -126,5 +126,5 @@ gulp.src([__dirname + '/dist/', __dirname + '/demo/dist/'])
 gulp.task('default', ['build', 'watch', 'server']);
 
 gulp.task('watch', function(){
-gulp.watch('src/*', ['build']);
+gulp.watch('app/**', ['build']);
 })
