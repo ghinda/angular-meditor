@@ -32,6 +32,11 @@
         </button>
       </li>
       <li>
+        <button type="button" ng-click="alignment = 'justify'" class="meditor-button-align-justify">
+          Align Justify
+        </button>
+      </li>
+      <li>
         <label class="meditor-select">
           <select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>
         </label>
@@ -40,6 +45,9 @@
         <label class="meditor-select">
           <select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>
         </label>
+      </li>
+      <li>
+        <input type="color" ng-model="color" class="meditor-button-align-left"/>
       </li>
     </ul>
   </div>

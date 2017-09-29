@@ -34,7 +34,20 @@ angular.module('angular-meditor', [])
         below: false
       };
 
-
+      scope.color = "#000000";      
+      scope.$watch('color', function(color) {
+        var colorValid  = /^#[0-9A-F]{6}$/i.test(color)
+        if(!colorValid) {
+          console.log('Invalid color value: ' + color);
+          return;
+        }
+    
+        document.execCommand('styleWithCSS', false, false);
+        document.execCommand('foreColor', false, color);
+    
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
+      });
 
       scope.sizeOptions = GetFontSizeOptions(scope.editorOptions);
       scope.size = scope.sizeOptions[0].value;
@@ -238,6 +251,9 @@ angular.module('angular-meditor', [])
           case 'right':
             command = 'justifyRight'
           break;
+          case 'justify':
+            command = 'justifyFull'
+          break;
         }
 
         document.execCommand('styleWithCSS', false, false);
@@ -294,7 +310,7 @@ angular.module('angular-meditor', [])
 
   function GetFontFamiliyOptions(options) {
     
-    if(angular.isDefined(options.fontFamiliy) && options.fontFamiliy.length > 0) {
+    if(options && options.fontFamiliy && options.fontFamiliy.length > 0) {
       return options.fontFamiliy;
     }    
 
@@ -334,7 +350,7 @@ angular.module('angular-meditor', [])
 
   function GetFontSizeOptions(options) {
     
-    if(angular.isDefined(options.fontSize) && options.fontSize.length > 0) {
+    if(options && options.fontSize && options.fontSize.length > 0) {
       return options.fontSize;
     }    
     
