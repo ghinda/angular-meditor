@@ -49,15 +49,15 @@
         </button>
       </li>
       <li>
-        <button ng-click='displayList = !displayList'>Style</button>
-        <ul ng-show="displayList" class="meditor-additional-options">
+        <button ng-click='showFontFamiliy()'>Style</button>
+        <ul ng-show="displayFamiliy" class="meditor-additional-options">
           <li ng-repeat="item in familyOptions">
             <button ng-click="changeFamily(item)">{{item.label}}</button>
           </li>
         </ul>
       </li>
       <li>
-          <button ng-click='displaySize = !displaySize'>Size</button>
+          <button ng-click='showFontSize()'>Size</button>
           <ul ng-show="displaySize" class="meditor-additional-options">
             <li ng-repeat="item in sizeOptions">
               <button ng-click="changeSize(item)">{{item.label}}</button>

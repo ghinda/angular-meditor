@@ -272,6 +272,15 @@ angular.module('angular-meditor', [])
         scope.$broadcast('meditor-change');
       });
 
+      scope.showFontSize = function() {
+        scope.displaySize = !scope.displaySize;
+        scope.displayFamiliy = false;
+      }
+
+      scope.showFontFamiliy = function() {
+        scope.displayFamiliy = !scope.displayFamiliy;
+        scope.displaySize = false;
+      }
 
       scope.changeFamily = function(item) {
         console.log(item);
