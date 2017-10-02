@@ -97,7 +97,7 @@ gulp.task('build:css', ['build:css:dist', 'build:css:vendor']);
 
 gulp.task('build', ['delete', 'build:js:bundle', 'build:css:bundle']);
 
-gulp.task('server', function () {
+gulp.task('server', ['watch'], function () {
 gulp.src('demo/')
     .pipe(server({
         livereload: true,
@@ -114,8 +114,16 @@ gulp.src(project.scss)
 });
 
 gulp.task('demo', ['build', 'demo:css'], function() {
-gulp.src('dist/*.*')
+gulp.src('dist/**')
     .pipe(copy('demo/'));
+gulp.src('app/index.html')
+    .pipe(gulp.dest('demo/'));
+gulp.src('app/scripts/demo.js')
+    .pipe(gulp.dest('demo/'));
+gulp.src('app/bower_components/**')
+    .pipe(gulp.dest('demo/bower_components'));
+gulp.src('dist/demo.css')
+    .pipe(gulp.dest('demo'));
 });
 
 gulp.task('delete', function(){
@@ -126,5 +134,5 @@ gulp.src([__dirname + '/dist/', __dirname + '/demo/dist/'])
 gulp.task('default', ['build', 'watch', 'server']);
 
 gulp.task('watch', function(){
-gulp.watch('app/**', ['build']);
+gulp.watch('app/**', ['build', 'demo']);
 })

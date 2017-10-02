@@ -9,3 +9,5 @@ public/
 *.kate-swp
 
 dist
+
+demo/*

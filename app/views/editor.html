@@ -49,15 +49,21 @@
         </button>
       </li>
       <li>
-        <label class="meditor-select">
-          <select ng-model="size" ng-options="s.value as s.label for s in sizeOptions" class="meditor-size-selector"></select>
-        </label>
+        <button ng-click='displayList = !displayList'>Font Style</button>
+        <ul ng-show="displayList">
+          <li ng-repeat="item in familyOptions">
+            <button ng-click="changeFamily(item)">{{item.label}}</button>
+          </li>
+        </ul>
       </li>
       <li>
-        <label class="meditor-select">
-          <select ng-model="family" ng-options="s as s.label for s in familyOptions" class="meditor-family-selector"></select>
-        </label>
-      </li>
+          <button ng-click='displaySize = !displaySize'>Font Size</button>
+          <ul ng-show="displaySize">
+            <li ng-repeat="item in sizeOptions">
+              <button ng-click="changeSize(item)">{{item.label}}</button>
+            </li>
+          </ul>
+        </li>
       <li>
         <input type="color" ng-model="color" class="meditor-button-align-left"/>
       </li>

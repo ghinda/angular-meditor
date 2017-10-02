@@ -272,6 +272,17 @@ angular.module('angular-meditor', [])
         scope.$broadcast('meditor-change');
       });
 
+
+      scope.changeFamily = function(item) {
+        console.log(item);
+        scope.family = item;
+      }
+
+      scope.changeSize = function(item) {
+        console.log(item);
+        scope.size = item.value;
+      }
+
       // watch the font family selector
       scope.$watch('family', function() {
         // dynamically load the family from google fonts
