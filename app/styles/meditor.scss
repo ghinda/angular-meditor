@@ -65,19 +65,24 @@ $toolbarText: #efefef;
     border: 0;
     padding: 0;
     margin: 0;
+
+    ul {
+      li {
+        display: inline-block;
+      }
+    }
   }
 
   button,
-  select {
+  select,
+  input[type=color] {
     float: left;
     height: emCalc(36);
     margin: 0;
     padding: emCalc(8) emCalc(12);
     background-color: $toolbarBackground;
-    border-width: 1px 0 0 0;
-    border-color: lighten($toolbarBackground, 5%);
-    border-style: solid;
     box-shadow: none;
+    border: none;
 
     font-size: 1em;
     color: $toolbarText;
@@ -86,7 +91,6 @@ $toolbarText: #efefef;
 
     &:hover {
       cursor: pointer;
-      background-color: darken($toolbarBackground, 5%);
     }
   }
 
@@ -100,13 +104,20 @@ $toolbarText: #efefef;
     width: emCalc(120);
   }
 
-  button {
-    width: emCalc(40);
+  .meditor-button-align-center {
+  }
+
+  .meditor-button-align-left {
+  }
+
+ .meditor-button-align-right {
+  }
+
+  .meditor-button-align-justify{
   }
 
   .meditor-button--active {
     background-color: darken($toolbarBackground, 5%);
-    border-width: 0 0 1px 0;
   }
 
   .meditor-select {
@@ -117,6 +128,24 @@ $toolbarText: #efefef;
     padding: 0;
 
     font-size: 1em;
+  }
+}
+
+.meditor-additional-options {
+  position: absolute;
+  top: 100%;
+  background-color: #222;
+  margin: 0;
+  padding: 0;
+
+  li {
+    width: 100%;
+
+    button {
+      &:hover {
+        color: #a99664;
+      }
+    }
   }
 }
 

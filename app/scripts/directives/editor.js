@@ -8,11 +8,12 @@ angular.module('angular-meditor', [])
   return {
     scope: {
       ngModel: '=',
-      toolbarContainer: '@?'
+      toolbarContainer: '@?',
+      editorOptions: '='
     },
     require: '?ngModel',
     transclude: true,
-    templateUrl: 'views/editor.html',
+    templateUrl: 'app/views/editor.html',
     link: function (scope, element, attributes, ctrl) {
 
       scope.model = {
@@ -33,69 +34,25 @@ angular.module('angular-meditor', [])
         below: false
       };
 
-      // fontSize options
-      scope.sizeOptions = [
-        {
-          label: '10',
-          value: 1
-        },
-        {
-          label: '13',
-          value: 2
-        },
-        {
-          label: '16',
-          value: 3
-        },
-        {
-          label: '18',
-          value: 4
-        },
-        {
-          label: '24',
-          value: 5
-        },
-        {
-          label: '32',
-          value: 6
-        },
-        {
-          label: '48',
-          value: 7
+      scope.color = '#000000';      
+      scope.$watch('color', function(color) {
+        var colorValid  = /^#[0-9A-F]{6}$/i.test(color);
+        if(!colorValid) {
+          console.log('Invalid color value: ' + color);
+          return;
         }
-      ];
+    
+        document.execCommand('styleWithCSS', false, false);
+        document.execCommand('foreColor', false, color);
+    
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
+      });
+
+      scope.sizeOptions = GetFontSizeOptions(scope.editorOptions);
       scope.size = scope.sizeOptions[0].value;
 
-      scope.familyOptions = [
-        {
-          label: 'Open Sans',
-          value: 'Open Sans, sans-serif'
-        },
-        {
-          label: 'Source Sans Pro',
-          value: 'Source Sans Pro, sans-serif'
-        },
-        {
-          label: 'Exo',
-          value: 'Exo, sans-serif'
-        },
-        {
-          label: 'Oswald',
-          value: 'Oswald, sans-serif'
-        },
-        {
-          label: 'Cardo',
-          value: 'Cardo, serif'
-        },
-        {
-          label: 'Vollkorn',
-          value: 'Vollkorn, serif'
-        },
-        {
-          label: 'Old Standard TT',
-          value: 'Old Standard TT, serif'
-        }
-      ];
+      scope.familyOptions = GetFontFamiliyOptions(scope.editorOptions);
       scope.family = scope.familyOptions[0];
 
       // current styles of selected elements
@@ -278,6 +235,34 @@ angular.module('angular-meditor', [])
         scope.$broadcast('meditor-change');
       };
 
+      // watch the alignment selector
+      scope.$watch('alignment', function(newValue, oldValue) {
+
+        if(newValue === oldValue)
+        {
+          return;
+        }
+
+        var command = 'justifyCenter';
+        switch(newValue) {
+          case 'left':
+              command = 'justifyLeft';
+          break;
+          case 'right':
+            command = 'justifyRight';
+          break;
+          case 'justify':
+            command = 'justifyFull';
+          break;
+        }
+
+        document.execCommand('styleWithCSS', false, false);
+        document.execCommand(command, false, null);
+
+        // custom event for two-way binding
+        scope.$broadcast('meditor-change');
+      });
+
       // watch the font size selector
       scope.$watch('size', function() {
         document.execCommand('styleWithCSS', false, false);
@@ -286,6 +271,24 @@ angular.module('angular-meditor', [])
         // custom event for two-way binding
         scope.$broadcast('meditor-change');
       });
+
+      scope.showFontSize = function() {
+        scope.displaySize = !scope.displaySize;
+        scope.displayFamiliy = false;
+      };
+
+      scope.showFontFamiliy = function() {
+        scope.displayFamiliy = !scope.displayFamiliy;
+        scope.displaySize = false;
+      };
+
+      scope.changeFamily = function(item) {
+        scope.family = item;
+      };
+
+      scope.changeSize = function(item) {
+        scope.size = item.value;
+      };
 
       // watch the font family selector
       scope.$watch('family', function() {
@@ -323,6 +326,84 @@ angular.module('angular-meditor', [])
     }
   };
 
+  function GetFontFamiliyOptions(options) {
+    
+    if(options && options.fontFamiliy && options.fontFamiliy.length > 0) {
+      return options.fontFamiliy;
+    }    
+
+    // default font familiy options
+    return [
+      {
+        label: 'Open Sans',
+        value: 'Open Sans, sans-serif'
+      },
+      {
+        label: 'Source Sans Pro',
+        value: 'Source Sans Pro, sans-serif'
+      },
+      {
+        label: 'Exo',
+        value: 'Exo, sans-serif'
+      },
+      {
+        label: 'Oswald',
+        value: 'Oswald, sans-serif'
+      },
+      {
+        label: 'Cardo',
+        value: 'Cardo, serif'
+      },
+      {
+        label: 'Vollkorn',
+        value: 'Vollkorn, serif'
+      },
+      {
+        label: 'Old Standard TT',
+        value: 'Old Standard TT, serif'
+      }
+    ];
+  }
+
+
+  function GetFontSizeOptions(options) {
+    
+    if(options && options.fontSize && options.fontSize.length > 0) {
+      return options.fontSize;
+    }    
+    
+    // default fontSize options
+    return [
+      {
+        label: '10',
+        value: 1
+      },
+      {
+        label: '13',
+        value: 2
+      },
+      {
+        label: '16',
+        value: 3
+      },
+      {
+        label: '18',
+        value: 4
+      },
+      {
+        label: '24',
+        value: 5
+      },
+      {
+        label: '32',
+        value: 6
+      },
+      {
+        label: '48',
+        value: 7
+      }
+    ];
+  }
 }])
 .directive('meditorContenteditable', [ '$timeout', function($timeout) {
   'use strict';
@@ -362,9 +443,7 @@ angular.module('angular-meditor', [])
             elm.html(ngModel);
           }
         });
-
       }
-
     }
   };
 }]);
