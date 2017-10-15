@@ -9,6 +9,7 @@ server = require('gulp-webserver'),
 ngAnotate = require('gulp-ng-annotate'),
 ngTemplate = require('gulp-ng-template-strings'),
 minifyHtml = require('gulp-minify-html'),
+jshint = require('gulp-jshint'),
 uglify = require('gulp-uglify');
 
 var vendor = {
@@ -95,7 +96,7 @@ gulp.src('./dist/css/*.css')
 
 gulp.task('build:css', ['build:css:dist', 'build:css:vendor']);
 
-gulp.task('build', ['delete', 'build:js:bundle', 'build:css:bundle']);
+gulp.task('build', ['jshint','delete', 'build:js:bundle', 'build:css:bundle']);
 
 gulp.task('server', ['watch'], function () {
 gulp.src('demo/')
@@ -131,8 +132,14 @@ gulp.src([__dirname + '/dist/', __dirname + '/demo/dist/'])
     .pipe(del());
 })
 
+gulp.task('jshint', function() {
+    return gulp.src('./app/scripts/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+})
+
 gulp.task('default', ['build', 'watch', 'server']);
 
 gulp.task('watch', function(){
-gulp.watch('app/**', ['build', 'demo']);
+    gulp.watch('app/**', ['build', 'demo']);
 })

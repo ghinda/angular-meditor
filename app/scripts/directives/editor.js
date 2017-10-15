@@ -34,9 +34,9 @@ angular.module('angular-meditor', [])
         below: false
       };
 
-      scope.color = "#000000";      
+      scope.color = '#000000';      
       scope.$watch('color', function(color) {
-        var colorValid  = /^#[0-9A-F]{6}$/i.test(color)
+        var colorValid  = /^#[0-9A-F]{6}$/i.test(color);
         if(!colorValid) {
           console.log('Invalid color value: ' + color);
           return;
@@ -52,7 +52,7 @@ angular.module('angular-meditor', [])
       scope.sizeOptions = GetFontSizeOptions(scope.editorOptions);
       scope.size = scope.sizeOptions[0].value;
 
-      scope.familyOptions = GetFontFamiliyOptions(scope.editorOptions)
+      scope.familyOptions = GetFontFamiliyOptions(scope.editorOptions);
       scope.family = scope.familyOptions[0];
 
       // current styles of selected elements
@@ -246,13 +246,13 @@ angular.module('angular-meditor', [])
         var command = 'justifyCenter';
         switch(newValue) {
           case 'left':
-              command = 'justifyLeft'
+              command = 'justifyLeft';
           break;
           case 'right':
-            command = 'justifyRight'
+            command = 'justifyRight';
           break;
           case 'justify':
-            command = 'justifyFull'
+            command = 'justifyFull';
           break;
         }
 
@@ -275,22 +275,20 @@ angular.module('angular-meditor', [])
       scope.showFontSize = function() {
         scope.displaySize = !scope.displaySize;
         scope.displayFamiliy = false;
-      }
+      };
 
       scope.showFontFamiliy = function() {
         scope.displayFamiliy = !scope.displayFamiliy;
         scope.displaySize = false;
-      }
+      };
 
       scope.changeFamily = function(item) {
-        console.log(item);
         scope.family = item;
-      }
+      };
 
       scope.changeSize = function(item) {
-        console.log(item);
         scope.size = item.value;
-      }
+      };
 
       // watch the font family selector
       scope.$watch('family', function() {
