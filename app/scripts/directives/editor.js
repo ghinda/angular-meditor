@@ -13,7 +13,7 @@ angular.module('angular-meditor', [])
     },
     require: '?ngModel',
     transclude: true,
-    templateUrl: 'app/views/editor.html',
+    templateUrl: 'views/editor.html',
     link: function (scope, element, attributes, ctrl) {
 
       scope.model = {
